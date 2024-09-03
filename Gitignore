@@ -1,0 +1,39 @@
+# Ignorar arquivos de banco de dados locais
+*.sql
+*.db
+
+# Ignorar arquivos de configuração do IDE
+.idea/
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+.vscode/
+
+# Ignorar arquivos temporários do sistema
+.DS_Store
+Thumbs.db
+
+# Ignorar arquivos de backup
+*.bak
+*.tmp
+*.swp
+
+# Ignorar diretórios específicos do sistema operacional
+node_modules/
+.env
+
+# Ignorar logs e arquivos temporários
+*.log
+*.pid
+*.gz
+
+# Ignorar arquivos gerados por compiladores
+*.class
+*.o
+*.out
+*.d
+
+# Ignorar arquivos de versões de controle
+*.git
+*.gitignore

@@ -1,0 +1,74 @@
+O Sistema de Controle de Estoque é uma solução desenvolvida para gerenciar eficientemente produtos, fornecedores e pedidos de reposição em um ambiente de estoque. Este sistema é crucial para empresas que precisam manter um controle rigoroso sobre seus inventários, garantir o abastecimento adequado e otimizar a logística.
+
+Este projeto utiliza um banco de dados relacional para armazenar e organizar informações sobre fornecedores, produtos e pedidos de reposição. O objetivo é fornecer uma visão clara e acessível do estado atual do estoque, facilitar o rastreamento de pedidos e permitir atualizações rápidas e precisas dos dados.
+
+
+# Sistema de Controle de Estoque
+
+## Descrição
+
+Este projeto é um Sistema de Controle de Estoque desenvolvido para gerenciar produtos, fornecedores e pedidos de reposição. O sistema permite a inserção, consulta, atualização e exclusão de registros relacionados ao estoque.
+
+## Estrutura do Banco de Dados
+
+O banco de dados é composto pelas seguintes tabelas:
+
+1. **Fornecedores**: Armazena informações sobre os fornecedores.
+   - `FornecedorID`: Identificador único do fornecedor.
+   - `NomeFornecedor`: Nome do fornecedor.
+   - `CNPJ`: CNPJ do fornecedor.
+   - `Telefone`: Número de telefone do fornecedor.
+   - `Endereco`: Endereço do fornecedor.
+
+2. **Produtos**: Armazena informações sobre os produtos.
+   - `ProdutoID`: Identificador único do produto.
+   - `NomeProduto`: Nome do produto.
+   - `Preco`: Preço do produto.
+   - `QuantidadeEstoque`: Quantidade disponível em estoque.
+   - `FornecedorID`: Identificador do fornecedor do produto (chave estrangeira).
+
+3. **PedidosReposicao**: Armazena informações sobre os pedidos de reposição.
+   - `PedidoID`: Identificador único do pedido.
+   - `ProdutoID`: Identificador do produto (chave estrangeira).
+   - `QuantidadePedido`: Quantidade solicitada no pedido.
+   - `DataPedido`: Data em que o pedido foi realizado.
+
+## Comandos SQL
+
+Os comandos SQL a seguir são utilizados para criar o banco de dados, tabelas, e realizar operações básicas de inserção, consulta, atualização e deleção de dados.
+
+### Criação do Banco de Dados e Tabelas
+
+```sql
+-- Criação do Banco de Dados
+CREATE DATABASE SistemaControleEstoque;
+USE SistemaControleEstoque;
+
+-- Criação das Tabelas
+-- Tabela de Fornecedores
+CREATE TABLE Fornecedores (
+    FornecedorID INT AUTO_INCREMENT PRIMARY KEY,
+    NomeFornecedor VARCHAR(100) NOT NULL,
+    CNPJ VARCHAR(14) NOT NULL UNIQUE,
+    Telefone VARCHAR(15),
+    Endereco TEXT
+);
+
+-- Tabela de Produtos
+CREATE TABLE Produtos (
+    ProdutoID INT AUTO_INCREMENT PRIMARY KEY,
+    NomeProduto VARCHAR(100) NOT NULL,
+    Preco DECIMAL(10, 2) NOT NULL,
+    QuantidadeEstoque INT NOT NULL,
+    FornecedorID INT,
+    FOREIGN KEY (FornecedorID) REFERENCES Fornecedores(FornecedorID)
+);
+
+-- Tabela de Pedidos de Reposição
+CREATE TABLE PedidosReposicao (
+    PedidoID INT AUTO_INCREMENT PRIMARY KEY,
+    ProdutoID INT,
+    QuantidadePedido INT NOT NULL,
+    DataPedido DATE NOT NULL,
+    FOREIGN KEY (ProdutoID) REFERENCES Produtos(ProdutoID)
+);
